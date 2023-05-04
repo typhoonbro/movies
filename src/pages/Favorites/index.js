@@ -1,44 +1,22 @@
 import {  useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import {toast} from 'react-toastify';
 
 function Favorites() {
     const [filmes, setFilmes] = useState([]);
-    const [emptyList, setEmptyList] = useState(true);
+    
     useEffect(() => {
         function getFilmes() {
             const minhaLista = JSON.parse(localStorage.getItem('filmes'));
-            
             setFilmes(minhaLista);
-            if(minhaLista == ''){
                 
-                    setEmptyList(true)
-                
-            }else {
-                setEmptyList(false)
-            }
-                    
 
             
         };
+        getFilmes()
         
-        getFilmes();
         
-    },[useState]);
-    function getFilmes() {
-        const minhaLista = JSON.parse(localStorage.getItem('filmes'));
-        
-        setFilmes(minhaLista);
-        if(minhaLista == ''){
-            
-                setEmptyList(true)
-            
-        }else {
-            setEmptyList(false)
-        }
-                
-
-        
-    };
+    }, []);
     function excluirFilme(id) {
         let newLista = filmes.filter( (item) => {
             return(
@@ -47,8 +25,7 @@ function Favorites() {
         })
         setFilmes(newLista);
         localStorage.setItem('filmes', JSON.stringify(newLista));
-        getFilmes();
-
+        toast.success('Filme removido da lista com sucesso!')
        
     };
 
@@ -58,7 +35,7 @@ function Favorites() {
             <div className='favorites-holder'>
                 <ul className='list-group'>
                     
-                    {emptyList ? <div><h4 className='empty-list'>Ops! Parece que a sua lista está vazia!</h4></div>  : 
+                    {filmes.length === 0 ? <div><h4 className='empty-list'>Ops! Parece que a sua lista está vazia!</h4></div>  : 
                     filmes.map((filme) => {
                         return(
                             <li key={filme.id} className='favorite-item list-group-item'>
@@ -67,7 +44,7 @@ function Favorites() {
                                         {filme.title}
                                     </h4>
                                     <div className='button-holder'>
-                                        <a className='btn btn-danger' href="#" onClick={() => {excluirFilme(filme.id)}}>Excluir</a>
+                                        <button className='btn btn-danger' onClick={() => {excluirFilme(filme.id)}}>Excluir</button>
                                         <Link className='btn btn-primary' to={`/filme/${filme.id}`}>Ver detalhes</Link>
                                     </div>
                                     

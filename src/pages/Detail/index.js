@@ -1,6 +1,7 @@
 import { useEffect, useState} from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import api from '../../services/api';
+import {toast} from 'react-toastify';
 
 const imgURL = 'https://image.tmdb.org/t/p';
 const imgWidth = '/original'; 
@@ -27,7 +28,7 @@ function Detail(){
         }
         loadFilme();
         
-    },[]);
+    },[id, navigate]);
     function salvarFilme() {
         const list = localStorage.getItem('filmes');
 
@@ -36,13 +37,13 @@ function Detail(){
         const hasFilme = filmesSalvos.some( (filmesSalvos) => filmesSalvos.id === filme.id );
 
         if(hasFilme){
-            alert('Já está na sua lista de favoritos!')
+            toast.warn('Esse filme já está na sua lista de favoritos!');
             return;
         }
 
         filmesSalvos.push(filme);
         localStorage.setItem('filmes', JSON.stringify(filmesSalvos));
-        alert('Filme salvo na sua lista!')
+        toast.success('Filme salvo na sua lista!');
     };
 
     if(loading){
