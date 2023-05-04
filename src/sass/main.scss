@@ -1,5 +1,7 @@
 @import '../../node_modules/bootstrap/scss/bootstrap.scss';
-
+* {
+    animation: all 1s;
+}
 body{
     margin: 0;
     .row {
@@ -7,12 +9,15 @@ body{
     }
 }
 .App {
-    margin: 0;
+    margin: 0 auto;
     display: flex;
     width: 100%;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    h1 {
+        text-align: center;
+    }
 }
 .not-found {
     margin-top: 40px;
@@ -21,9 +26,11 @@ header {
     padding: 10px 0;
     background-color: black;
     width: 100%;
+    margin-bottom: 20px;
     ul {
         display: flex;
         justify-content: space-evenly;
+        margin: 10px 0;
         a {
             color: white;
         }
@@ -41,23 +48,36 @@ header {
     justify-content: center;
     text-align: center;
 }
-.lista-filmes {
-    .filme {
-        display: flex;
-        flex-flow: column;
-        align-items: center;
-        justify-content: center;
-        margin: 25px 0;
-        .filme-title {
-            margin: 10px 0;
-            text-align: center;
+.home-container {
+    @media screen and (max-width: 576px) {
+        min-width: 95%;
+    }
+    @media screen and (min-width: 577px) {
+        min-width: 500px;
+    }
+    @media screen and (min-width: 768px) {
+        min-width: 600px;
+    }
+    max-width: 95%;
+    .lista-filmes {
+        .filme {
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+            justify-content: center;
+            margin: 25px 0;
+            .filme-title {
+                margin: 10px 0;
+                text-align: center;
+            }
+            img {
+                margin: 10px 0;
+            }
+            
         }
-        img {
-            margin: 10px 0;
-        }
-        
     }
 }
+
 .movie-holder {
     .movie-backdrop-title {
         
@@ -65,9 +85,11 @@ header {
         background-position: center;
         min-height: 500px;
         min-width: 400px;
+        max-width: 100%;
         .backdrop {
             min-width: 100%;
             min-height: 500px;
+            max-width: 100%;
             background-color: rgba(0,0,0,0.5);
             display: flex;
             align-items: center;
@@ -86,5 +108,44 @@ header {
         align-items: flex-start;
         justify-content: center;
         flex-flow: column;
+        margin: 40px;
+        min-width: 400px;
+        max-width: 100%;
+        .button-holder {
+            margin-top: 15px;
+            a:not(:first-child) {
+                margin: 0 10px;
+            }
+        }
     }
+}
+.favorites {
+    min-width: 500px;
+    @media screen and (max-width: 500px) {
+        min-width: 95%;
+    }
+    max-width: 90%;
+    .favorites-holder {
+        .list-group {
+            .empty-list {
+                text-align: center;
+            }
+            .favorite-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                .details {
+                    .button-holder {
+                        a:not(:nth-child(1)) {
+                            margin-left: 10px; 
+                        }
+                    }
+                }
+                img {
+                    max-height: 150px;
+                }
+            }
+        }
+    }
+    
 }

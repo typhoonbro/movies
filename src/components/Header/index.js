@@ -7,7 +7,7 @@ function Header(){
                 <div className="container-fluid">
                     <ul>
                         <Link className="logo" to='/'>Movies Tex</Link>
-                        <Link className="favoritos" to='/favoritos'>Meus Filmes</Link>
+                        <Link className="favoritos" to='/Favorites'>Meus Filmes</Link>
                     </ul>
                 </div>
             </div>
